@@ -1,6 +1,25 @@
+.dashboard {
+  background-image: url("../assets/img/mountain.png");
+  background-color: rgba(42, 48, 66, 1);
+  background-size: cover;
+}
+
+.content {
+  height: 100vh; /* Set height to 100 viewport height */
+  width: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .box {
   background-color: gainsboro;
   border-radius: 20px;
   width: 300px;
   height: 550px;
+}
+
+.myfooter {
+  background-color: #0f212b;
 }
