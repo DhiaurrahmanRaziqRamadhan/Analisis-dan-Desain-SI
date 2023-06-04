@@ -5,10 +5,13 @@ Nama anggota kelompok 3 :
  > Adli Fiqrullah   
    NPM. 2117051075
   
- > Alkhadafi Saddam Simparico    
-   NPM. 2117051049
+ > Dhiaurrahman Raziq Ramadhan    
+   NPM. 2117051048
  
- > Auvar Mahsa Fahlevi     
-   NPM. 2117051027
+ > Muhammad Zidan Pasya   
+   NPM. 2117051070
+   
+ > Nauval Hanif  
+   NPM. 2157051008
 
 ~~ Happy Ngoding
