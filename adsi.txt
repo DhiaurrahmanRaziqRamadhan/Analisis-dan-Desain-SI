@@ -1,0 +1,48 @@
+CREATE TABLE customer(
+    id INT(10)PRIMARY KEY AUTO_INCREMENT,
+    nama VARCHAR(100) NOT NULL,
+    alamat VARCHAR(100) NOT NULL,
+    tanggal_pemesanan VARCHAR(100) NOT NULL,
+    tipe_paket VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE jasa(
+    id INT(2) PRIMARY KEY AUTO_INCREMENT,
+    foto VARCHAR(100) NOT NULL,
+    tipe VARCHAR(100) NOT NULL,
+    harga VARCHAR(100) NOT NULL,
+    waktu VARCHAR(100)
+);
+
+CREATE TABLE akun_admin(
+    id INT(2) PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100) NOT NULL,
+    pass VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE akun_customer(
+    id INT(2) PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    alamat VARCHAR(100) NOT NULL,
+    noHandphone VARCHAR(100) NOT NULL,
+    pass VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE transaksi(
+    id INT(2) PRIMARY KEY AUTO_INCREMENT,
+    nama VARCHAR(100) NOT NULL,
+    tanggal_Pemesanan VARCHAR(100) NOT NULL,
+    tanggal_Pembayaran VARCHAR(100) NOT NULL,
+    total VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE laporan(
+    id INT(2) PRIMARY KEY AUTO_INCREMENT,
+    nama VARCHAR(100) NOT NULL,
+    tanggal VARCHAR(100) NOT NULL,
+    laporan VARCHAR(100) NOT NULL
+);
+
+email: laundry@unila.com
+pass : 123
