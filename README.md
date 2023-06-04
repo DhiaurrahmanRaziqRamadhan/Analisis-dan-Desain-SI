@@ -1,5 +1,5 @@
 # Laundry Express
-Berisi codingan website untuk sistem informasi laundry express, dimana dengan adanya sistem informasi berbasi web ini dapat memudahkan owner dan customer dalam melakukan transaksi dsb.
+Berisi codingan website untuk sistem informasi laundry express, dimana dengan adanya sistem informasi berbasis web ini dapat memudahkan owner dan customer dalam melakukan transaksi, dsb.
 
 Nama anggota kelompok 3 :
  > Adli Fiqrullah   
