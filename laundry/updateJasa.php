@@ -1,6 +1,6 @@
 <?php
     include "koneksi.php";
-    $query = "SELECT *FROM jasa";
+    $query = "SELECT * FROM jasa";
     $sql = mysqli_query($conn, $query);
     $id = 1;
 ?>
@@ -61,10 +61,11 @@
             <form action="updateJasa2.php" method="POST">
                 <div class="mb-5 row">
                     <div class="col-sm-15">
-                        <select class="form-select" aria-label="Default select example" name="opsi">
+                        <input type="hidden" name="id_jasa" value="" />
+                        <select class="form-select" aria-label="Default select example" name="opsi" onchange="document.getElementsByName('id_jasa')[0].value = this.value;">
                             <option selected>Nama Layanan</option>
                             <?php while($result = mysqli_fetch_assoc($sql)) { ?>
-                                    <option value="<?= $result['tipe']; ?>"><?= $result['tipe']; ?></option>
+                                    <option value="<?= $result['id']; ?>"><?= $result['tipe']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
