@@ -1,7 +1,30 @@
 <?php
 include "koneksi.php";
-$sql = mysqli_query($conn, "SELECT * FROM jasa where id = '$_GET[update]'");
+$sql = mysqli_query($conn, "SELECT * FROM jasa where id = '$_POST[id_jasa]'");
 $result = mysqli_fetch_array($sql);
+
+if (isset($_POST['edit_data'])) {
+    $foto = $_POST['foto'];
+    $tipe = $_POST['tipe'];
+    $harga = $_POST['harga'];
+    $waktu = $_POST['waktu'];
+
+    $query = "UPDATE jasa SET
+              foto='$foto',
+              tipe='$tipe',
+              harga='$harga',
+              waktu='$waktu'
+              WHERE id='$_GET[id]'";
+
+    if (mysqli_query($conn, $query)) {
+        echo "Record updated successfully";
+        header('Location: data_harga.php');
+        exit;
+    } else {
+        echo "Error updating record: " . mysqli_error($conn);
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -57,22 +80,24 @@ $result = mysqli_fetch_array($sql);
             <div class="card-header">
                 <h3 class="text-center font-weight-light my-4">Edit Service</h3>
             </div>
-            <form action="updateJasa2.php" method="POST">
-                <input class="form-control" type="file" placeholder="Foto" name="foto" required><br>
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="inputEmail" type="text" placeholder="Nama layanan" name="nama" value="<?= $result['tipe']; ?>" required />
-                    <label for="inputEmail">Nama Layanan</label>
+            <form action="<?php echo $_SERVER['PHP_SELF'] . '?id=' . $_POST['id_jasa']; ?>" method="POST">
+                <div class="mb-3">
+                    <input class="form-control" type="file" placeholder="foto" name="foto" value="<?= $result['foto']; ?>" required>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" type="text" placeholder="Harga" name="harga" required />
-                    <label for="inputPassword">Harga</label>
+                    <input class="form-control" id="tipe" type="text" placeholder="tipe" name="tipe" value="<?= $result['tipe']; ?>" required />
+                    <label for="tipe">Nama Layanan</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Lama Pengerjaan" name="waktu" required></textarea>
-                    <label for="inputPassword">Lama Pengerjaan</label>
+                    <input class="form-control" type="text" placeholder="harga" name="harga" value="<?= $result['harga']; ?>" required />
+                    <label for="harga">Harga</label>
                 </div>
-                <a href="data_harga.php" class="btn btn-danger" style="margin-left: 20px;">Kembali</a>
-                <a href="updateCustomer.php?update=<?php echo $result['id']; ?>" class="btn btn-primary" type="button">Update</a>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="text" placeholder="waktu" name="waktu" value="<?= $result['waktu']; ?>" required>
+                    <label for="waktu">Lama Pengerjaan</label>
+                </div>
+                <a href="updateJasa.php" class="btn btn-danger" style="margin-left: 20px;">Kembali</a>
+                <input type="submit" name="edit_data" value="Update" class="btn btn-primary">
             </form>
         </div>
     </div>
