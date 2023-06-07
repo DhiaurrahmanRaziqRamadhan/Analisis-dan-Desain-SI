@@ -19,8 +19,10 @@
         $cek_user = mysqli_num_rows($sql_user);
         
         if ($cek_user > 0) {
+            $row = mysqli_fetch_assoc($sql_user);
+            $id = $row['id'];
             $_SESSION['login'] = true;
-            header('Location: paket_laundry.php');
+            header("Location: paket_laundry.php?id={$id}");
             exit();
         } else {
             header('Location: index.php');

@@ -6,6 +6,8 @@
         exit();
     }
 
+    $sql = mysqli_query($conn, "SELECT * FROM transaksi");
+    $no = 1;
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #131212a3;">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="data_customer.php" style="color: white;"><center>****</center></a>
+        <a class="navbar-brand ps-3" href="data_customer.php" style="color: white;"><center></center></a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -36,7 +38,7 @@
             <div class="sb-nav-link-icon">
                 <img src="assets/profil.svg" alt="">   
                 admin   
-                <a href="logout.php"><img src="assets/logout.svg" alt=""></a>
+                <a href="logout.php" class="ms-3"><img src="assets/logout.svg" alt=""></a>
             </div>
         </ul>
     </nav>
@@ -71,8 +73,10 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">TRANSAKSI</h1>
-                    <p style="margin-left: 1000px; margin-top: -40px">Admin/adliif</p><br>
+                    <div style="display: flex; justify-content: space-between;">
+                        <h1 class="mt-4">TRANSAKSI</h1>
+                        <p class="mt-4">Admin/adliif</p>
+                    </div>
                     <div class="card mb-4">
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -82,7 +86,6 @@
                                         <th>ID</th>
                                         <th>Nama</th>
                                         <th>Tanggal Pemesanan</th>
-                                        <th>Tanggal Pembayaran</th>
                                         <th>Total</th>
                                         <th>Action</th>
                                     </tr>
@@ -93,30 +96,34 @@
                                         <th>ID</th>
                                         <th>Nama</th>
                                         <th>Tanggal Pemesanan</th>
-                                        <th>Tanggal Pembayaran</th>
                                         <th>Total</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                    <?php 
+                                        while($data = mysqli_fetch_assoc($sql)){
+                                    ?>
                                     <tr>
-                                        <td>1</td>
-                                        <td>001</td>
-                                        <td>Customer</td>
-                                        <td>01/01/2023</td>
-                                        <td>01/01/2023</td>
-                                        <td>Rp.50.000</td>
-                                        <td><center><a href="#" class="btn btn-primary">Lunas</a></center></td>
+                                        <td><?php echo $no++ ?></td>
+                                        <td><?php echo $data['id'] ?></td>
+                                        <td><?php echo $data['nama'] ?></td>
+                                        <td><?php echo $data['tanggal_Pemesanan'] ?></td>
+                                        <td>Rp.<?php echo $data['total'] ?></td>
+                                        <td>
+                                            <center>
+                                                <?php if($data['konfirmasi'] == 'iya'){ ?>
+                                                <button class="btn btn-primary">Lunas</button>
+                                                <?php } ?>
+                                                <?php if($data['konfirmasi'] == 'tidak'){ ?>
+                                                <a href="transaksi_exe.php?id=<?php echo $data['id'] ?>" class="btn btn-secondary">Confirm</a>
+                                                <?php } ?>
+                                            </center>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>002</td>
-                                        <td>Customer</td>
-                                        <td>01/01/2023</td>
-                                        <td>01/01/2023</td>
-                                        <td>Rp.50.000</td>
-                                        <td><center><a href="#" class="btn btn-secondary">Confirm</a></center></td>
-                                    </tr>
+                                    <?php 
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

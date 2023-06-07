@@ -1,5 +1,6 @@
 <?php
     include "koneksi.php";
+    
     $foto = $_POST['foto'];
     $nama = $_POST['nama'];
     $harga = $_POST['harga'];
