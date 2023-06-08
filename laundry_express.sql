@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jun 2023 pada 05.45
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.1.6
+-- Waktu pembuatan: 08 Jun 2023 pada 20.41
+-- Versi server: 10.4.24-MariaDB-log
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,7 +52,6 @@ CREATE TABLE `akun_customer` (
   `username` varchar(100) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `noHandphone` varchar(100) NOT NULL,
-  `member` varchar(255) NOT NULL,
   `pass` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -60,10 +59,10 @@ CREATE TABLE `akun_customer` (
 -- Dumping data untuk tabel `akun_customer`
 --
 
-INSERT INTO `akun_customer` (`id`, `email`, `username`, `alamat`, `noHandphone`, `member`, `pass`) VALUES
-(1, 'adliif@unila.com', 'adliif', 'Jl. Abdul Muis NO.10, Bandar Lampung', '(+62) 82267854345', 'tidak', '123'),
-(2, 'hanipjamil@gmail.com', 'hanip', 'natar', '081234567890', 'iya', '1234'),
-(3, 'zidan123@gmail.com', 'Zidan', 'kampung baru', '(+62) 895704299495', '', '12345');
+INSERT INTO `akun_customer` (`id`, `email`, `username`, `alamat`, `noHandphone`, `pass`) VALUES
+(1, 'adliif@gmail.com', 'adliif', 'Gedung meneng', '(+62) 82267854345', '123'),
+(2, 'hanipjamil@gmail.com', 'hanip', 'natar', '081234567890', '1234'),
+(3, 'zidan123@gmail.com', 'zidan', 'kampung baru', '(+62) 895704299495', '12345');
 
 -- --------------------------------------------------------
 
@@ -84,9 +83,23 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `nama`, `alamat`, `nohp`, `member`) VALUES
-(1, 'adliif', 'Balam', '081234567890', 'tidak'),
+(1, 'adliif', 'kampung baru', '081234567890', 'iya'),
 (2, 'hanip', 'natar', '081928912334', 'iya'),
-(3, 'Zidan', 'kampung baru', '(+62) 895704299495', 'tidak');
+(3, 'zidan', 'kampung baru', '(+62) 895704299495', 'tidak'),
+(4, 'raziq', 'kampung baru', '(+62) 82267854345', 'tidak');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `data_laporan`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `data_laporan` (
+`id` int(2)
+,`username` varchar(100)
+,`tanggal` varchar(100)
+,`laporan` varchar(100)
+);
 
 -- --------------------------------------------------------
 
@@ -109,7 +122,7 @@ CREATE TABLE `jasa` (
 INSERT INTO `jasa` (`id`, `foto`, `tipe`, `harga`, `waktu`) VALUES
 (1, 'laundryKiloan.png', 'Laundry Kiloan', '5000', '1 Day'),
 (2, 'dryCleaning.png', 'Dry Cleaning', '10000', '4 Hours'),
-(5, 'laundryOnDemond.png', 'Laundry On Demond', '8000', '16 Hours');
+(7, 'laundryOnDemond.png', 'Laundry On Demond', '8000', '16 Hours');
 
 -- --------------------------------------------------------
 
@@ -119,17 +132,19 @@ INSERT INTO `jasa` (`id`, `foto`, `tipe`, `harga`, `waktu`) VALUES
 
 CREATE TABLE `laporan` (
   `id` int(2) NOT NULL,
-  `nama` varchar(100) NOT NULL,
   `tanggal` varchar(100) NOT NULL,
-  `laporan` varchar(100) NOT NULL
+  `laporan` varchar(100) NOT NULL,
+  `id_customer` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `laporan`
 --
 
-INSERT INTO `laporan` (`id`, `nama`, `tanggal`, `laporan`) VALUES
-(2, 'adliif', '6 July 2023', 'mantap bang');
+INSERT INTO `laporan` (`id`, `tanggal`, `laporan`, `id_customer`) VALUES
+(13, '8 June 2023', 'lumayanlah', 1),
+(14, '8 June 2023', 'tidak mengecewakan', 2),
+(15, '8 June 2023', 'Semangat', 1);
 
 -- --------------------------------------------------------
 
@@ -152,10 +167,16 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `nama`, `alamat`, `tanggal_Pemesanan`, `tipe_paket`, `total`, `konfirmasi`) VALUES
-(1, 'raziq', '', '2023-06-01', '', '10000', 'iya'),
-(2, 'hanif', '', '2023-06-02', '', '9000', 'iya'),
-(11, 'adliif', 'Jl. Abdul Muis NO.10, Bandar Lampung', '6 July 2023', 'Laundry Kiloan', '12000', 'iya'),
-(12, 'Zidan', 'kampung baru', '6 July 2023', 'LaundryGes', '12800', 'tidak');
+(13, 'zidan', 'kampung baru', '6 August 2023', 'Dry Cleaning', '200000', 'iya');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `data_laporan`
+--
+DROP TABLE IF EXISTS `data_laporan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `data_laporan`  AS SELECT `laporan`.`id` AS `id`, `akun_customer`.`username` AS `username`, `laporan`.`tanggal` AS `tanggal`, `laporan`.`laporan` AS `laporan` FROM (`laporan` join `akun_customer` on(`laporan`.`id_customer` = `akun_customer`.`id`))  ;
 
 --
 -- Indexes for dumped tables
@@ -189,7 +210,8 @@ ALTER TABLE `jasa`
 -- Indeks untuk tabel `laporan`
 --
 ALTER TABLE `laporan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_customer` (`id_customer`);
 
 --
 -- Indeks untuk tabel `transaksi`
@@ -217,25 +239,35 @@ ALTER TABLE `akun_customer`
 -- AUTO_INCREMENT untuk tabel `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `jasa`
 --
 ALTER TABLE `jasa`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `laporan`
+--
+ALTER TABLE `laporan`
+  ADD CONSTRAINT `laporan_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `akun_customer` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
