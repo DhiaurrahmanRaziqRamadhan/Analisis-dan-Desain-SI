@@ -33,7 +33,7 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #131212a3;">
+    <nav class="sb-topnav navbar navbar-expand navbar-light">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="data_customer.php" style="color: white;"></a>
         <!-- Sidebar Toggle-->
@@ -50,17 +50,17 @@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion" style="background-color: #2A3042;">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <center><img src="img/white 2.png" alt="logo" style="width: 120px; margin-top: -20px;"></center>
-                        <center><h5><b>Laundry Express</b></h5></center>
-                        <div class="sb-sidenav-menu-heading">Menu</div>
-                        <a class="nav-link" href="paket_laundry.php?id=<?php echo $customer['id'] ?>">
+                        <center><h5 class="text-white"><b>Laundry Express</b></h5></center>
+                        <div class="sb-sidenav-menu-heading text-white">Menu</div>
+                        <a class="nav-link text-white" href="paket_laundry.php?id=<?php echo $customer['id']; ?>">
                             <div class="sb-nav-link-icon"><img src="assets/buy.svg" alt=""></div>
                             Paket Laundry
                         </a>
-                        <a class="nav-link" href="laporanUser.php?id=<?php echo $customer['id'] ?>" style="margin-left: -5px;">
+                        <a class="nav-link text-white" href="laporanUser.php?id=<?php echo $customer['id']; ?>" style="margin-left: -5px;">
                             <div class="sb-nav-link-icon"><img src="assets/report.svg" alt=""></i></div>
                             Laporan
                         </a>
@@ -71,12 +71,16 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">LAPOR</h1>
+                    <h1 class="mt-4">LAPORAN</h1>
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="mb-4">
-                                <div class="btn btn-primary" onclick="showPopup()">Add Report</div>
-                                <!-- <a href="tambahLaporan.php" class="btn btn-primary">Add report</a> -->
+                                <div class="btn btn-primary rounded-pill" onclick="showPopup()">
+                                <div class="d-flex">
+                                    <img class="me-1" src="assets\tambah.svg">
+                                    <div>Add Report</div>
+                                </div>
+                            </div>
                             </div>
                             <table id="datatablesSimple">
                                 <thead>
@@ -126,7 +130,7 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" type="text" placeholder="Password" name="tanggal" value="<?php 
-                            $tanggal = date('d/m/Y');
+                            $tanggal = date('m/d/Y');
                             $formatTanggal = date("j F Y", strtotime($tanggal));
                             echo $formatTanggal; ?>" style="pointer-events: none;"/>
                             <label for="inputPassword">Tanggal Laporan</label>
@@ -136,8 +140,8 @@
                             <label for="inputPassword">Laporan</label>
                         </div>
                         <br><br><br>
-                        <a href="" class="btn btn-danger">Kembali</a>
-                        <button type="submit" class="btn btn-primary" style="margin-left: 460px" name="tambah">Tambah</button>
+                        <a href="" class="btn btn-danger rounded-pill">Kembali</a>
+                        <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="tambah">Tambah</button>
                     </form>
                 </div>
             </div>
