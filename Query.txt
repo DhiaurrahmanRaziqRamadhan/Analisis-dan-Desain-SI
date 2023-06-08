@@ -39,10 +39,15 @@ CREATE TABLE transaksi(
 
 CREATE TABLE laporan(
     id INT(2) PRIMARY KEY AUTO_INCREMENT,
-    nama VARCHAR(100) NOT NULL,
     tanggal VARCHAR(100) NOT NULL,
-    laporan VARCHAR(100) NOT NULL
+    laporan VARCHAR(100) NOT NULL,
+    id_customer INT(2) NOT NULL,
+    FOREIGN KEY (id_customer) REFERENCES akun_customer(id)
 );
+
+CREATE VIEW data_laporan AS
+SELECT laporan.id, akun_customer.username, laporan.tanggal, laporan.laporan
+FROM laporan JOIN akun_customer ON laporan.id_customer = akun_customer.id;
 
 email: laundry@unila.com
 pass : 123
