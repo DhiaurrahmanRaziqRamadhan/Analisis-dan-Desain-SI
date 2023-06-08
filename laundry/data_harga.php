@@ -7,6 +7,29 @@
     }
 
     $sql = mysqli_query($conn, "SELECT * FROM jasa");
+
+    if(isset($_POST['edit'])) {
+        $id = $_POST['id'];
+        $foto = $_POST['foto'];
+        $tipe = $_POST['tipe'];
+        $harga = $_POST['harga'];
+        $waktu = $_POST['waktu'];
+
+        $query = "UPDATE jasa SET
+                  foto='$foto',
+                  tipe='$tipe',
+                  harga='$harga',
+                  waktu='$waktu' WHERE id='$id'";
+
+        if (mysqli_query($conn, $query)) {
+            echo "Record updated successfully";
+            header('Location: data_harga.php');
+            exit;
+        } else {
+            echo "Error updating record: " . mysqli_error($conn);
+        }
+            }
+
     $id = 1;
 ?>
 
@@ -30,7 +53,7 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #131212a3;">
+    <nav class="sb-topnav navbar navbar-expand navbar-light">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="data_customer.php" style="color: white;"></a>
         <!-- Sidebar Toggle-->
@@ -47,25 +70,25 @@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion" style="background-color: #2A3042;">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <center><img src="img/white 2.png" alt="logo" style="width: 120px; margin-top: -20px;"></center>
-                        <center><h5><b>Laundry Express</b></h5></center>
-                        <div class="sb-sidenav-menu-heading">Menu</div>
-                        <a class="nav-link" href="data_customer.php">
+                        <center><h5 class="text-white"><b>Laundry Express</b></h5></center>
+                        <div class="sb-sidenav-menu-heading text-white">Menu</div>
+                        <a class="nav-link text-white" href="data_customer.php">
                             <div class="sb-nav-link-icon"><img src="assets/customer.svg" alt=""></div>
                             Data Customer
                         </a>
-                        <a class="nav-link" href="data_harga.php">
+                        <a class="nav-link text-white" href="data_harga.php">
                             <div class="sb-nav-link-icon"><img src="assets/Wallet_fill.svg" alt=""></i></div>
                             Data Harga
                         </a>
-                        <a class="nav-link" href="transaksi.php">
+                        <a class="nav-link text-white" href="transaksi.php">
                             <div class="sb-nav-link-icon"><img src="assets/Frame 135.svg" alt=""></i></div>
                             Transaksi
                         </a>
-                        <a class="nav-link" href="laporan.php" style="margin-left: -5px">
+                        <a class="nav-link text-white" href="laporan.php" style="margin-left: -5px">
                             <div class="sb-nav-link-icon"><img src="assets/report.svg" alt=""></i></div>
                             Laporan
                         </a>
@@ -83,8 +106,13 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div  class="mb-4">
-                                <div class="btn btn-primary m-1" style="margin-left: 10px !important;" onclick="showPopup()">Add Service</div>
-                                <a href="updateJasa.php" class="btn btn-primary m-1">Edit Service</a><br><br>
+                                <div class="btn btn-primary m-1 rounded-pill" style="margin-left: 10px !important;" onclick="showPopupTambah()">
+                                <div class="d-flex">
+                                    <img class="me-1" src="assets\tambah.svg">
+                                    <div>Add Service</div>
+                                </div>
+                                </div>
+                                <br><br>
                             </div>
                             <div class="container">
                                 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -93,9 +121,19 @@
                                         <div class="card">
                                             <img src="img/<?= $result['foto']; ?>" class="card-img" alt="..." >
                                             <div class="card-img-overlay">
-                                                <a href="hapusJasa_exe.php?delete=<?php echo $result['id']; ?>" onclick="return confirm('Melanjutkan untuk menghapus data?');" type="button">
-                                                    <img src="assets/Subtract.svg" alt="" style="margin-left: 265px; margin-top: -60px;">
+                                                <div style="margin-top:-30px;margin-left:-20px;margin-bottom:30px;display:flex;cursor: pointer">
+                                                <img src="assets/edit.svg" onclick="showPopupEdit()"
+                                                data-id="<?= $result['id']; ?>"
+                                                data-foto="<?= $result['foto']; ?>"
+                                                data-tipe="<?= $result['tipe']; ?>"
+                                                data-harga="<?= $result['harga']; ?>"
+                                                data-waktu="<?= $result['waktu']; ?>"
+                                                type="button">
+                                                <a href="hapusJasa_exe.php?delete=<?= $result['id']; ?>" onclick="return confirm('Melanjutkan untuk menghapus data?');" type="button">
+                                                    <img src="assets/Subtract.svg" alt="" style="margin-left:10px">
                                                 </a>
+                                            </div>
+
                                                 <h4 class="card-title" style="margin-top: -15px;"><?= $result['tipe']; ?></h4>
                                                 <div class="sb-nav-link-icon">
                                                     <img src="assets/Ticket.svg" alt="">   
@@ -122,8 +160,10 @@
             </footer>
         </div>
     </div>
+
+    <!-- popup tambah layanan -->
     <div class="popup_tambah">
-        <div class="blocker" onclick="hidePopup()"></div>
+        <div class="blocker" onclick="hidePopupTambah()"></div>
         <div class="form">
             <div class="container">
                 <div class="box">
@@ -145,32 +185,94 @@
                             <textarea class="form-control" placeholder="Lama Pengerjaan" name="waktu" required></textarea>
                             <label for="inputPassword">Lama Pengerjaan</label>
                         </div><br><br>
-                        <a href="" class="btn btn-danger">Kembali</a>
-                        <button type="submit" class="btn btn-primary" style="margin-left: 460px" name="tambah">Tambah</button>
+                        <a href="" class="btn btn-danger rounded-pill">Kembali</a>
+                        <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="tambah">Tambah</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- popup edit customer -->
+    <div class="popup_edit">
+        <div class="blocker" onclick="hidePopupEdit()"></div>
+        <div class="form">
+            <div class="container">
+                <div class="box">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-4">Edit Service</h3>
+                    </div>
+                    <form action="" method ="POST">
+                            <input type="hidden" id="id" name="id">
+                            <label for="foto">Foto Layanan</label><br>
+                            <input class="form-control" type="file" id="foto" placeholder="foto" name="foto" required>
+                        <div class="form-floating mb-3 mt-3">
+                            <input class="form-control" id="tipe" type="text" placeholder="Nama layanan" name="tipe" required />
+                            <label for="inputEmail">Nama Layanan</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control"  id="harga" type="text" placeholder="Harga" name="harga" required />
+                            <label for="harga">Harga</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="waktu" type="text" placeholder="Lama Pengerjaan" name="waktu" required></input>
+                            <label for="waktu">Lama Pengerjaan</label>
+                        </div><br><br>
+                        <a href="" class="btn btn-danger rounded-pill">Kembali</a>
+                        <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="edit">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const popup_tambah = document.querySelector(".popup_tambah");
+        const popup_edit = document.querySelector(".popup_edit");
 
-        function showPopup() {
-            popup_tambah.classList.add('open');
-        }
+    function showPopupTambah() {
+        popup_tambah.classList.add('open');
+    }
 
-        function hidePopup() {
-            popup_tambah.classList.remove('open');
-        }
+    function hidePopupTambah() {
+        popup_tambah.classList.remove('open');
+    }
+
+    function showPopupEdit() {
+        const editButton = event.target;
+
+        // Mengambil nilai dari atribut data pada tombol yang diklik
+        const id = editButton.dataset.id;
+        // const foto = editButton.dataset.foto;
+        const tipe = editButton.dataset.tipe;
+        const harga = editButton.dataset.harga;
+        const waktu = editButton.dataset.waktu;
+
+        // Mengisi nilai-nilai ke dalam input form
+        const inputId = document.querySelector(".popup_edit input[name='id']");
+        const inputTipe = document.querySelector(".popup_edit input[name='tipe']");
+        const inputHarga = document.querySelector(".popup_edit input[name='harga']");
+        const inputWaktu = document.querySelector(".popup_edit input[name='waktu']");
+
+
+        inputId.value = id;
+        // inputFoto.value = foto;
+        inputTipe.value = tipe;
+        inputHarga.value = harga;
+        inputWaktu.value = waktu;
+
+        popup_edit.classList.add('open');
+    }
+
+    function hidePopupEdit() {
+        popup_edit.classList.remove('open');
+    }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/simple-datatables.min.js"></script>
     <script src="js/datatables-simple-demo.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
