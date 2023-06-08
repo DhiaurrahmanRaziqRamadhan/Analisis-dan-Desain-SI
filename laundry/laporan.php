@@ -27,9 +27,9 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #131212a3;">
+    <nav class="sb-topnav navbar navbar-expand navbar-light">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="data_customer.php" style="color: white;"><center>****</center></a>
+        <a class="navbar-brand ps-3" href="data_customer.php" style="color: white;"></a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -44,25 +44,25 @@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion" style="background-color: #2A3042;">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <center><img src="img/white 2.png" alt="logo" style="width: 120px; margin-top: -20px;"></center>
-                        <center><h5><b>Laundry Express</b></h5></center>
-                        <div class="sb-sidenav-menu-heading">Menu</div>
-                        <a class="nav-link" href="data_customer.php">
+                        <center><h5 class="text-white"><b>Laundry Express</b></h5></center>
+                        <div class="sb-sidenav-menu-heading text-white">Menu</div>
+                        <a class="nav-link text-white" href="data_customer.php">
                             <div class="sb-nav-link-icon"><img src="assets/customer.svg" alt=""></div>
                             Data Customer
                         </a>
-                        <a class="nav-link" href="data_harga.php">
+                        <a class="nav-link text-white" href="data_harga.php">
                             <div class="sb-nav-link-icon"><img src="assets/Wallet_fill.svg" alt=""></i></div>
                             Data Harga
                         </a>
-                        <a class="nav-link" href="transaksi.php">
+                        <a class="nav-link text-white" href="transaksi.php">
                             <div class="sb-nav-link-icon"><img src="assets/Frame 135.svg" alt=""></i></div>
                             Transaksi
                         </a>
-                        <a class="nav-link" href="laporan.php" style="margin-left: -5px">
+                        <a class="nav-link text-white" href="laporan.php" style="margin-left: -5px">
                             <div class="sb-nav-link-icon"><img src="assets/report.svg" alt=""></i></div>
                             Laporan
                         </a>
