@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['admin'])) {
+    if (!isset($_SESSION['login'])) {
         header("location:index.php");
         exit();
     }

@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['admin'])) {
+    if (!isset($_SESSION['login'])) {
         header("location:index.php");
         exit();
     }
@@ -108,7 +108,7 @@
                                         <td>
                                             <center>
                                                 <?php if($data['konfirmasi'] == 'iya'){ ?>
-                                                <button class="btn btn-primary rounded-pill" style="pointer-events: none;">Lunas</button>
+                                                <button class="btn btn-primary rounded-pill">Lunas</button>
                                                 <?php } ?>
                                                 <?php if($data['konfirmasi'] == 'tidak'){ ?>
                                                 <a href="transaksi_exe.php?id=<?php echo $data['id'] ?>" class="btn btn-secondary rounded-pill">Confirm</a>

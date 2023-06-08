@@ -1,12 +1,12 @@
 <?php
      session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['admin'])) {
+    if (!isset($_SESSION['login'])) {
         header("location:index.php");
         exit();
     }
 
-    $sql = mysqli_query($conn, "SELECT * FROM laporan");
+    $sql = mysqli_query($conn, "SELECT * FROM data_laporan");
     $id = 1;
 ?>
 
@@ -88,7 +88,7 @@
                                 <?php while($result = mysqli_fetch_assoc($sql)) { ?>
                                     <tr>
                                         <td><?php echo $id++ ?></td>
-                                        <td><?= $result['nama']; ?></td>
+                                        <td><?= $result['username']; ?></td>
                                         <td><?= $result['tanggal']; ?></td>
                                         <td><?= $result['laporan']; ?></td>
                                     </tr>

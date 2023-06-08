@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['customer'])) {
+    if (!isset($_SESSION['login'])) {
         header("location:index.php");
         exit();
     }
@@ -152,8 +152,8 @@
                                     </select>
                                 </div>
                             </div><br><br><br>
-                            <a href="" class="btn btn-danger rounded-pill">Kembali</a>
-                            <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="tambah">Tambah</button>
+                            <a href="" class="btn btn-danger rounded-pill" style="margin-left: 30px;">Kembali</a>
+                            <button onclick="return alert('Success Melakukan Pemesanan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px; margin-top: -60px;" name="tambah">Tambah</button>
                         </form>
                     </div>
                 </div>

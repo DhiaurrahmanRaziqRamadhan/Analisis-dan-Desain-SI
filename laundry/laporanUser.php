@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['customer'])) {
+    if (!isset($_SESSION['login'])) {
         header("location:index.php");
         exit();
     }
@@ -10,8 +10,8 @@
     $sql_user = mysqli_query($conn, "SELECT * FROM akun_customer WHERE id=$id");
     $customer = mysqli_fetch_array($sql_user);
 
-    $sql = mysqli_query($conn, "SELECT * FROM laporan");
-    $id=1;
+    $sql = mysqli_query($conn, "SELECT * FROM data_laporan");
+    $no=1;
 ?>
 
 <!DOCTYPE html>
@@ -86,19 +86,19 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
                                         <th>Tanggal Laporan</th>
                                         <th>Laporan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php while($result = mysqli_fetch_assoc($sql)) { ?>
+                                    <?php if($result['username'] == $customer['username']) { ?>
                                     <tr>
-                                        <td><?php echo $id++ ?></td>
-                                        <td><?= $result['nama']; ?></td>
+                                        <td><?php echo $no++ ?></td>
                                         <td><?= $result['tanggal']; ?></td>
                                         <td><?= $result['laporan']; ?></td>
                                     </tr>
+                                    <?php } ?>
                                 <?php } ?>
                                 </tbody>
                             </table>
@@ -140,8 +140,8 @@
                             <label for="inputPassword">Laporan</label>
                         </div>
                         <br><br><br>
-                        <a href="" class="btn btn-danger rounded-pill">Kembali</a>
-                        <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="tambah">Tambah</button>
+                        <a href="" class="btn btn-danger rounded-pill" style="margin-left: 30px;">Kembali</a>
+                        <button onclick="return alert('Success Menambahkan Laporan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px; margin-top: -60px;" name="tambah">Tambah</button>
                     </form>
                 </div>
             </div>
