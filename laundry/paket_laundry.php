@@ -34,7 +34,7 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #131212a3;">
+    <nav class="sb-topnav navbar navbar-expand navbar-light">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="data_customer.php" style="color: white;"></a>
         <!-- Sidebar Toggle-->
@@ -51,17 +51,17 @@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion" style="background-color: #2A3042;">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <center><img src="img/white 2.png" alt="logo" style="width: 120px; margin-top: -20px;"></center>
-                        <center><h5><b>Laundry Express</b></h5></center>
-                        <div class="sb-sidenav-menu-heading">Menu</div>
-                        <a class="nav-link" href="paket_laundry.php?id=<?php echo $customer['id']; ?>">
+                        <center><h5 class="text-white"><b>Laundry Express</b></h5></center>
+                        <div class="sb-sidenav-menu-heading text-white">Menu</div>
+                        <a class="nav-link text-white" href="paket_laundry.php?id=<?php echo $customer['id']; ?>">
                             <div class="sb-nav-link-icon"><img src="assets/buy.svg" alt=""></div>
                             Paket Laundry
                         </a>
-                        <a class="nav-link" href="laporanUser.php?id=<?php echo $customer['id']; ?>" style="margin-left: -5px;">
+                        <a class="nav-link text-white" href="laporanUser.php?id=<?php echo $customer['id']; ?>" style="margin-left: -5px;">
                             <div class="sb-nav-link-icon"><img src="assets/report.svg" alt=""></i></div>
                             Laporan
                         </a>
@@ -76,7 +76,12 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div  class="mb-4">
-                                <div class="btn btn-primary m-1" style="margin-left: 10px !important;" onclick="showPopup()">Order</div>
+                                <div class="btn btn-primary m-1 rounded-pill" style="margin-left: 10px !important;" onclick="showPopup()">
+                                <div class="d-flex">
+                                    <img class="me-1" src="assets\tambah.svg">
+                                    <div>Order</div>
+                                </div>
+                            </div>
                             </div>
                             <div class="container">
                                 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -148,8 +153,8 @@
                                     </select>
                                 </div>
                             </div><br><br><br>
-                            <a href="" class="btn btn-danger">Kembali</a>
-                            <button type="submit" class="btn btn-primary" style="margin-left: 460px" name="tambah">Tambah</button>
+                            <a href="" class="btn btn-danger rounded-pill">Kembali</a>
+                            <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="tambah">Tambah</button>
                         </form>
                     </div>
                 </div>
