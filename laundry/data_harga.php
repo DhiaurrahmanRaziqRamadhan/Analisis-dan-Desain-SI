@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['login'])) {
+    if (!isset($_SESSION['admin'])) {
         header("location:index.php");
         exit();
     }
@@ -61,8 +61,7 @@
                 class="fas fa-bars"></i></button>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="sb-nav-link-icon">
-                <img src="assets/profil.svg" alt="">   
+            <div class="sb-nav-link-icon"> 
                 admin   
                 <a href="logout.php" class="ms-3"><img src="assets/logout.svg" alt=""></a>
             </div>
@@ -101,7 +100,6 @@
                 <div class="container-fluid px-4">
                     <div style="display: flex; justify-content: space-between;">
                         <h1 class="mt-4">DATA CUSTOMER</h1>
-                        <p class="mt-4">Admin/adliif</p>
                     </div>
                     <div class="card mb-4">
                         <div class="card-body">
@@ -185,8 +183,8 @@
                             <textarea class="form-control" placeholder="Lama Pengerjaan" name="waktu" required></textarea>
                             <label for="inputPassword">Lama Pengerjaan</label>
                         </div><br><br>
-                        <a href="" class="btn btn-danger rounded-pill">Kembali</a>
-                        <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="tambah">Tambah</button>
+                        <a href="" class="btn btn-danger rounded-pill" style="margin-left: 50px;">Kembali</a>
+                        <button onclick="return alert('Success Menambahkan Jasa');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px; margin-top: -60px;" name="tambah">Tambah</button>
                     </form>
                 </div>
             </div>
@@ -219,7 +217,7 @@
                             <label for="waktu">Lama Pengerjaan</label>
                         </div><br><br>
                         <a href="" class="btn btn-danger rounded-pill">Kembali</a>
-                        <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="edit">Simpan</button>
+                        <button onclick="return alert('Success Melakukan Perubahan');" type="submit" class="btn btn-primary rounded-pill" style="margin-left: 460px;" name="edit">Simpan</button>
                     </form>
                 </div>
             </div>

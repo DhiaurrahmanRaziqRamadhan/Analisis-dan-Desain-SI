@@ -1,7 +1,7 @@
 <?php
      session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['login'])) {
+    if (!isset($_SESSION['admin'])) {
         header("location:index.php");
         exit();
     }
@@ -35,10 +35,9 @@
                 class="fas fa-bars"></i></button>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="sb-nav-link-icon">
-                <img src="assets/profil.svg" alt="">   
+            <div class="sb-nav-link-icon"> 
                 admin   
-                <a href="logout.php"><img src="assets/logout.svg" alt=""></a>
+                <a href="logout.php" class="ms-3"><img src="assets/logout.svg" alt=""></a>
             </div>
         </ul>
     </nav>
@@ -74,7 +73,6 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">LAPORAN</h1>
-                    <p style="margin-left: 1000px; margin-top: -40px">Admin/adliif</p><br>
                     <div class="card mb-4">
                         <div class="card-body">
                             <table id="datatablesSimple">

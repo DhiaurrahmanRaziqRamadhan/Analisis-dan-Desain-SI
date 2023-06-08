@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['login'])) {
+    if (!isset($_SESSION['customer'])) {
         header("location:index.php");
         exit();
     }
@@ -11,6 +11,7 @@
     $customer = mysqli_fetch_array($sql_user);
 
     $sql = mysqli_query($conn, "SELECT * FROM laporan");
+    $id=1;
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +42,7 @@
                 class="fas fa-bars"></i></button>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="sb-nav-link-icon">
-                <img src="assets/profil.svg" alt="">   
+            <div class="sb-nav-link-icon">  
                 <?php echo $customer['username'] ?>   
                 <a href="logout.php" class="ms-3"><img src="assets/logout.svg" alt=""></a>
             </div>
@@ -85,7 +85,7 @@
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>Tanggal Laporan</th>
                                         <th>Laporan</th>

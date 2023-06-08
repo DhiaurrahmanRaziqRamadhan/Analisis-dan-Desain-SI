@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['login'])) {
+    if (!isset($_SESSION['admin'])) {
         header("location:index.php");
         exit();
     }
@@ -61,7 +61,6 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="sb-nav-link-icon">
-                <img src="assets/profil.svg" alt="">   
                 admin   
                 <a href="logout.php" class="ms-3"><img src="assets/logout.svg" alt=""></a>
             </div>
@@ -100,7 +99,6 @@
                 <div class="container-fluid px-4">
                     <div style="display: flex; justify-content: space-between;">
                         <h1 class="mt-4">DATA CUSTOMER</h1>
-                        <p class="mt-4">Admin</p>
                     </div>
                     <br>
                     <div class="card mb-4">
@@ -117,7 +115,6 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Id</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
                                         <th>No Handphone</th>
@@ -129,7 +126,6 @@
                                 <?php while($result = mysqli_fetch_assoc($sql)) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $result['id'] ?></td>
                                         <td><?= $result['nama']; ?></td>
                                         <td><?= $result['alamat']; ?></td>
                                         <td><?= $result['nohp']; ?></td>
@@ -197,8 +193,8 @@
                                 </select>
                             </div>
                         </div><br><br><br>
-                        <a href="" class="btn btn-danger rounded-pill">Kembali</a>
-                        <button type="submit" onclick="return alert('Success Melakukan Perubahan');" class="btn btn-primary rounded-pill" style="margin-left: 460px" name="tambah">Tambah</button>
+                        <a href="" class="btn btn-danger rounded-pill" style="margin-left: 30px;">Kembali</a>
+                        <button type="submit" onclick="return alert('Success Melakukan Perubahan');" class="btn btn-primary rounded-pill" style="margin-left: 460px; margin-top: -60px;" name="tambah">Tambah</button>
                     </form>
                 </div>
             </div>
@@ -244,25 +240,6 @@
             </div>
         </div>
     </div>
-
-    <!-- notifikasi edit -->
-    <!-- <div class="popup_notifikasi">
-        <div class="blocker" onclick="hidePopupNotifikasi()"></div>
-        <div class="form">
-            <div class="container">
-                <div class="box">
-                    <div class="card-header">
-                        <img class="dp-flex justify-content-center" src="img/success.png" alt="">
-                        <h3 class="text-center font-weight-light my-4">Success</h3>
-                    </div>
-                    <div>
-                        <h5 class="text-center font-weight-light my-4">Berhasil melakukan Perubahan</h5>
-                    </div>
-                    <button onclick="hidePopupNotifikasi()" class="btn btn-primary">Done</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <script>
         const popup_tambah = document.querySelector(".popup_tambah");

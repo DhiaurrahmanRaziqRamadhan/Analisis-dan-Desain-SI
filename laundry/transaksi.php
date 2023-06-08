@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "koneksi.php";
-    if (!isset($_SESSION['login'])) {
+    if (!isset($_SESSION['admin'])) {
         header("location:index.php");
         exit();
     }
@@ -35,8 +35,7 @@
                 class="fas fa-bars"></i></button>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="sb-nav-link-icon">
-                <img src="assets/profil.svg" alt="">   
+            <div class="sb-nav-link-icon"> 
                 admin   
                 <a href="logout.php" class="ms-3"><img src="assets/logout.svg" alt=""></a>
             </div>
@@ -75,7 +74,6 @@
                 <div class="container-fluid px-4">
                     <div style="display: flex; justify-content: space-between;">
                         <h1 class="mt-4">TRANSAKSI</h1>
-                        <p class="mt-4">Admin/adliif</p>
                     </div>
                     <div class="card mb-4">
                         <div class="card-body">
@@ -83,7 +81,6 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>ID</th>
                                         <th>Nama</th>
                                         <th>Tanggal Pemesanan</th>
                                         <th>Total</th>
@@ -93,7 +90,6 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>ID</th>
                                         <th>Nama</th>
                                         <th>Tanggal Pemesanan</th>
                                         <th>Total</th>
@@ -106,14 +102,13 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
-                                        <td><?php echo $data['id'] ?></td>
                                         <td><?php echo $data['nama'] ?></td>
                                         <td><?php echo $data['tanggal_Pemesanan'] ?></td>
                                         <td>Rp.<?php echo $data['total'] ?></td>
                                         <td>
                                             <center>
                                                 <?php if($data['konfirmasi'] == 'iya'){ ?>
-                                                <button class="btn btn-primary rounded-pill">Lunas</button>
+                                                <button class="btn btn-primary rounded-pill" style="pointer-events: none;">Lunas</button>
                                                 <?php } ?>
                                                 <?php if($data['konfirmasi'] == 'tidak'){ ?>
                                                 <a href="transaksi_exe.php?id=<?php echo $data['id'] ?>" class="btn btn-secondary rounded-pill">Confirm</a>
